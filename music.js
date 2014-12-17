@@ -23,7 +23,8 @@ var Songs = {
 var arrayToUl = function(array){
   var resultString = "<ul>";
   for (i=0; i<array.length; i++){
-    resultString = resultString + "<li>" + array[i] + "</li>";
+    link = array[i].replace(/ /g, "_").toLowerCase();
+    resultString = resultString + "<li><a href='http://localhost:3000/" + link + "'>" + array[i] + "</a></li>";
   };
   resultString = resultString + "</ul>";
   return resultString;
@@ -36,35 +37,35 @@ var server = http.createServer(function(request, response){
   if (path === "/artists"){
     msg = arrayToUl(Artists.artists);
   }
-  else if (path === "/artists/beatles"){
+  else if (path === "/the_beatles"){
     msg = arrayToUl(Albums.beatles);
   }
-  else if (path === "/artists/lessavyfav"){
+  else if (path === "/les_savy_fav"){
     msg = arrayToUl(Albums.lessavyfav);
   }
-  else if (path === "/artists/caribou"){
+  else if (path === "/caribou"){
     msg = arrayToUl(Albums.caribou);
   }
-  else if (path === "/artists/beatles/whitealbum"){
+  else if (path === "/the_white_album"){
     msg = arrayToUl(Songs.whitealbum);
   }
-  else if (path === "/artists/beatles/abbeyroad"){
+  else if (path === "/abbey_road"){
     msg = arrayToUl(Songs.abbeyroad);
   }
-  else if (path === "/artists/lessavyfav/inches"){
+  else if (path === "/inches"){
     msg = arrayToUl(Songs.inches);
   }
-  else if (path === "/artists/lessavyfav/emor"){
+  else if (path === "/emor"){
     msg = arrayToUl(Songs.emor);
   }
-  else if (path === "/artists/caribou/andorra"){
+  else if (path === "/andorra"){
     msg = arrayToUl(Songs.andorra);
   }
-  else if (path === "/artists/caribou/swim"){
+  else if (path === "/swim"){
     msg = arrayToUl(Songs.swim);
   }else{
     msg = "<h1>Missing something...</h1>";
   }
-  response.end("<html><body>" + msg + "<br><a href='localhost:3000'>Return to home page</a></body></html>");
+  response.end("<html><body>" + msg + "<br><a href='localhost:3000/artists'>Return to home page</a></body></html>");
 });
 server.listen(3000);
